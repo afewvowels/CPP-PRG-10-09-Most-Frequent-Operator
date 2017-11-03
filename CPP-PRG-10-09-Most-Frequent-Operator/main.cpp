@@ -10,77 +10,64 @@
 //  string. Demonstrate the function in a complete program.
 
 #include <iostream>
+#include <cstring>
+#include <string>
 
 using namespace std;
 
-char *getUserString(char *, int *);
-int *adjustArrSize(char *, int *);
-void resizeArray(char *, char *, int *);
+string *getUserString(string *);
+char *convertStringToC(string *, char *);
+char *findMostCommonLetter(char *, char *);
 
 
 
 int main()
 {
-    int *intArrSize = nullptr;
-    intArrSize = new int;
-    *intArrSize = 999;
-    
-    char *chrArrayTemp = nullptr;
-    chrArrayTemp = new char[*intArrSize];
-    
     string *strInput = nullptr;
     strInput = new string;
     
-    chrArrayTemp= getUserString(chrArrayTemp, intArrSize);
-    
-    intArrSize = adjustArrSize(chrArrayTemp, intArrSize);
+    strInput= getUserString(strInput);
     
     char *chrArray = nullptr;
-    chrArray = new char[*intArrSize];
+    chrArray = new char[strInput->size()];
     
-    resizeArray(chrArray, chrArrayTemp, intArrSize);
+    chrArray = convertStringToC(strInput, chrArray);
     
-    delete [] chrArrayTemp;
-    chrArrayTemp = nullptr;
+    delete [] strInput;
+    strInput = nullptr;
+    
+    char *chrLetter = nullptr;
+    chrLetter = new char;
+    
+    chrLetter = findMostCommonLetter(chrArray, chrLetter);
+    
+    delete [] chrArray;
+    chrArray = nullptr;
     
     
     
     return 0;
 }
 
-char *getUserString(char *chrArr, int *intSize)
+string *getUserString(string *strString)
 {
     cout << "Please enter a string:\n";
-    cin.getline(chrArr, *intSize);
+    getline(cin, *strString);
+    
+    return strString;
+}
+
+char *convertStringToC(string *strString, char *chrArr)
+{
+    *chrArr = *strString->c_str();
     
     return chrArr;
 }
 
-int *adjustArrSize(char *chrArr, int *intSize)
-{
-    int *intCounter = nullptr;
-    intCounter = new int;
-    *intCounter = 0;
-    
-    for (int i = 0 ; i < *intSize ; i++)
-    {
-        *intCounter += 1;
-        
-        if (chrArr[i] == '\0')
-        {
-            break;
-        }
-    }
-    
-    *intSize = *intCounter;
-    
-    return intSize;
-}
 
-void resizeArray(char *chrArr1, char *chrArr2, int *intSize)
+char *findMostCommonLetter(char *chrArr, char *chrLetter)
 {
-    for (int i = 0 ; i < *intSize ; i++)
-    {
-        chrArr2[i] = chrArr1[i];
-    }
+    
+    
+    return chrLetter;
 }
